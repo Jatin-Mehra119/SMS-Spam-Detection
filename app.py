@@ -61,12 +61,15 @@ message = st.text_area("Type your message here:", height=150)
 
 # Add a button and display the result
 if st.button("Check", key='check_button'):
-    pred = model.predict([message])
-    st.markdown('---')
-    if pred[0] == 'spam':
-        st.error(f"The message is: **{pred[0].upper()}**")
+    if message == '':
+        st.warning("Please enter a message to check.")
     else:
-        st.success(f"The message is: **{pred[0].upper()}**")
+        pred = model.predict([message])
+        st.markdown('---')
+        if pred[0] == 'spam':
+            st.error(f"The message is: **{pred[0].upper()}**")
+        else:
+            st.success(f"The message is: **{pred[0].upper()}**")
 
 # Add footer
 st.markdown(
